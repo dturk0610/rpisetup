@@ -242,6 +242,76 @@ ssh pifun@10.55.0.1
 
 What assigning a static IP address does, is we can tell our pi to tell any computer that it interfaces with, that its "name" or identification is one singular value. Normally, our routers and computers will assign IP addresses to new machines as it sees fit, but in this case it will get the value directly from the pi instead of making a new one. This allows us to use commads like sftp (secure file-transfer protocol) and ssh (secure shell) in order to interact with our pi. While I will show you what it is like to see the pi and interact with it using a mouse, keyboard and monitor, our main interaction will be happening over an ssh shell. I will show you how to set this up in vscode later as well so please ensure that you have downloaded vscode.
 
+### Connecting to the pi
+
+The next thing we will do is "ssh" into the pi. This can be done a couple of ways. The first and most basic way is by opening a terminal and typing the command:
+
+``` CMD
+ssh rpifun@10.55.0.1
+```
+
+If this isn't the first time that you've ssh'd into the 10.55.0.1 IP address, then you'll have to find a way to delete the last saved SHA you used. This is normall found in a "known_hosts" file somewhere on your machine. Since it is device specific, I will not go into detail on how to do that.
+
+If it is your first time sshing into this IP and into this pi then you'll likely preprompted in the CMD about saving a fingerprint. This can normally be accepted by typing "yes" then hitting enter. After that you'll be prompted for the password (which, as a reminder is above, and it is "pitime" in our case). Enter that and then you're in!
+
+The more useful way to ssh in, and the way that we will be doing for the rest of this internship, is by using another software, like VSCode or PuTTy. In our case we will be using VSCode.
+
+### Setting up VS Code
+
+- First thing that you're going to want to do is to download vscode from microsoft's [website](https://code.visualstudio.com/download).
+
+- After following the guide to install it, you can open VSCode up and you should see a screen similar to this:
+
+![vscode screenshot](/images/vscode_first_screen.png)
+
+- This image of VSCode was taken on a Mac in Feb, 2023. So as VSCode updates, this layout may change. Regardless the following steps should remain similar.
+
+- Next you're going to want to head into the "extensions" tab. This will pull up a page of all available extensions that the VSCode community has made to make the programming experience much more intuitive and versitle:
+
+![vscode extenstions icon](/images/vscode_extensions_icon.png)
+
+![vscode extentions tab opened](/images/vscode_extentions_tab.png)
+
+- With this open, click into the new opened tab's search bar and look up "Remote". You should see an extension called "Remote SSH". Click install on this and follow any guide that may appear to install it into vscode.
+
+![vscode remote ssh extension](/images/vscode_remote_ssh.png)
+
+- With this install, you will see a new small tab on the very botton left of your screen.
+
+![vscode ssh icon](/images/vscode_ssh_icon.png)
+
+- Click this an you will be prompted to "Connect to host"
+
+![vscode connect to hosts](/images/vscode_connect_to_host.png)
+
+- After this you will "Add new SSH host" which is where you will type in the rpi's ssh name and ip:
+
+``` CMD
+rpifun@10.55.0.1
+```
+
+- You'll hit enter, add this host to which ever config of your choosing and hit enter again. A dialogue box will present in the bottom right of the screen, asking if you would like to connect to the host (in this case the host is the pi). Click the connect button. You will then be prompted about which platform the host is on:
+
+![host platform](/images/host_platform.png)
+
+- Click Linux, then enter. If you get proppted to "continue", just hit enter again. Finally you will be prompted for the password:
+
+![password prompt](/images/password_prompt.png)
+
+- Enter the password and then you're in! However, there is one minor issue. When we ssh into the pi like this, we are in the /home/rpifun directory. If this isn't an issue with you, then you can leave it as is and open a terminal with the terminal tab and start going your merry way. I, however, prefer being able to use the file explorer that vscode has to offer in the top left. We can make use of this by clicking the icon and opening the tab up and clicking "Open Folder":
+
+![open folder](/images/open_folder.png)
+
+- When we click this, vscode will prompt us with which folder on the pi we want to open. For sake of simplicity and consistency, we are going to choode the "Documents" folder:
+
+![documents folder select](/images/documents_folder.png)
+
+- When we click "ok" we will need to reenter the password and viola! We can use the file explorer again to create new files and folders! You may be prompted to "trust authors", just click the check box about the trust authors button and you'll be on your way!
+
+- Now that we finally got into the pi, we don't want to have to *always* perform this long ssh process. So I have good news! Using VSCode, we can save this thing called a "workspace". In our case this workspace will open up the ssh tunnel for us and just prompt us with the password box and open us up to this folder we just selected. Click on the "File" tab in the top of your window or screen if you are on windows or Mac respectively, and click the "Save Workspace As..". This will ask you for a file location and name that you want to store this workspace file (I normally choose Desktop).
+
+- After you save this workspace file, close the ssh connection by clicking the ssh icon in the bottom left again and typing "close remote connection" then hitting enter. This will properly shut the ssh tunnel down and allot your to conserve precious resources on your pi. To open the connection back up, just go to your saved workspace file and open it up!
+
 ## Resources
 
 - [Set up](https://www.raspberrypi.com/tutorials/how-to-set-up-raspberry-pi/)
